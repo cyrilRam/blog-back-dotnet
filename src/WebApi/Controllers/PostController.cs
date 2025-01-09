@@ -1,7 +1,7 @@
-﻿using Application.Dto;
-using Application.Interfaces.Services;
+﻿using Application.Services.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Dto;
 
 namespace WebApi.Controllers;
 

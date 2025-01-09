@@ -1,16 +1,9 @@
-
-using Application.Interfaces.Repositories;
-using Application.Interfaces.Services;
-using Application.Services;
-using BlogDotNet.Middleware;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Application.Services.Implementation;
+using Application.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Persistence;
-using Persistence.Repositories;
+using Persistence.Repositories.Implementation;
+using Persistence.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
