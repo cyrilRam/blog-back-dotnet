@@ -1,4 +1,7 @@
-﻿using Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Interfaces;
 
@@ -6,9 +9,9 @@ namespace Persistence.Repositories.Implementation;
 
 public class PostRepository : IPostRepositories
 {
-    private readonly AppDbContext  _dbContext;
+    private readonly AppDbContext _dbContext;
 
-    public PostRepository(AppDbContext  dbContext)
+    public PostRepository(AppDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -54,5 +57,3 @@ public class PostRepository : IPostRepositories
         }
     }
 }
-
-

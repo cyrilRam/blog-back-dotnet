@@ -1,49 +1,50 @@
-﻿
-using System.Net;
+﻿using System;
 using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-namespace BlogDotNet.Middleware
+namespace BlogDotNet.Middleware;
+
+public class ExceptionMiddleware
 {
-    public class ExceptionMiddleware
+    private readonly ILogger<ExceptionMiddleware> _logger;
+    private readonly RequestDelegate _next;
+
+    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
+        _next = next;
+        _logger = logger;
+    }
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    public async Task Invoke(HttpContext context)
+    {
+        try
         {
-            _next = next;
-            _logger = logger;
+            await _next(context);
         }
-
-        public async Task Invoke(HttpContext context)
+        catch (Exception ex)
         {
-            try
-            {
-                await _next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
+            await HandleExceptionAsync(context, ex);
         }
+    }
 
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            _logger.LogError(exception, exception.Message);
+    private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        _logger.LogError(exception, exception.Message);
 
-            var response = context.Response;
-            response.ContentType = "application/json";
-            //
-            // var statusCode = exception switch
-            // {
-            //     NotFoundException => HttpStatusCode.NotFound,
-            //     _ => HttpStatusCode.InternalServerError
-            // };
-            //
-            // response.StatusCode = (int)statusCode;
+        var response = context.Response;
+        response.ContentType = "application/json";
+        //
+        // var statusCode = exception switch
+        // {
+        //     NotFoundException => HttpStatusCode.NotFound,
+        //     _ => HttpStatusCode.InternalServerError
+        // };
+        //
+        // response.StatusCode = (int)statusCode;
 
-            var result = JsonSerializer.Serialize(new { message = exception.Message });
-            await response.WriteAsync(result);
-        }
+        var result = JsonSerializer.Serialize(new { message = exception.Message });
+        await response.WriteAsync(result);
     }
 }

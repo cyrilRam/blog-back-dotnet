@@ -1,6 +1,9 @@
-﻿using Application.Services.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Application.Services.Interfaces;
+using Domain.Entities;
 using Persistence.Repositories.Interfaces;
-
 
 namespace Application.Services.Implementation;
 
@@ -13,22 +16,22 @@ public class CategoryService : ICategoryService
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<IEnumerable<Domain.Entities.Category>> GetAllCategoriesAsync()
+    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
     {
         return await _categoryRepository.GetAllAsync();
     }
 
-    public async Task<Domain.Entities.Category> GetCategoryByIdAsync(Guid id)
+    public async Task<Category> GetCategoryByIdAsync(Guid id)
     {
         return await _categoryRepository.GetByIdAsync(id);
     }
 
-    public async Task CreateCategoryAsync(Domain.Entities.Category category)
+    public async Task CreateCategoryAsync(Category category)
     {
         await _categoryRepository.CreateAsync(category);
     }
 
-    public async Task UpdateCategoryAsync(Domain.Entities.Category category)
+    public async Task UpdateCategoryAsync(Category category)
     {
         await _categoryRepository.UpdateAsync(category);
     }

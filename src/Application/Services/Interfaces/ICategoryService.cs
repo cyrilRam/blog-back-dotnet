@@ -1,13 +1,15 @@
-﻿
-
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace Application.Services.Interfaces;
 
 public interface ICategoryService
 {
-    Task<IEnumerable<Domain.Entities.Category>> GetAllCategoriesAsync();
-    Task<Domain.Entities.Category> GetCategoryByIdAsync(Guid id);
-    Task CreateCategoryAsync(Domain.Entities.Category category);
-    Task UpdateCategoryAsync(Domain.Entities.Category category);
+    Task<IEnumerable<Category>> GetAllCategoriesAsync();
+    Task<Category> GetCategoryByIdAsync(Guid id);
+    Task CreateCategoryAsync(Category category);
+    Task UpdateCategoryAsync(Category category);
     Task DeleteCategoryAsync(Guid id);
 }

@@ -1,4 +1,7 @@
-﻿using Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Interfaces;
 
@@ -6,9 +9,9 @@ namespace Persistence.Repositories.Implementation;
 
 public class CategoryRepository : ICategoryRepository
 {
-    private readonly AppDbContext  _dbContext;
+    private readonly AppDbContext _dbContext;
 
-    public CategoryRepository(AppDbContext  dbContext)
+    public CategoryRepository(AppDbContext dbContext)
     {
         _dbContext = dbContext;
     }

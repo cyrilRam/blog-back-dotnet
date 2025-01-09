@@ -1,6 +1,10 @@
 using Application.Services.Implementation;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Persistence;
 using Persistence.Repositories.Implementation;
 using Persistence.Repositories.Interfaces;

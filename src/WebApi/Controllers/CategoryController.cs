@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using System.Threading.Tasks;
 using Application.Services.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ public class CategoryController : ControllerBase
     {
         _categoryService = categoryService;
     }
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {

@@ -1,4 +1,6 @@
-﻿namespace WebApi.Dto;
+﻿using System;
+
+namespace WebApi.Dto;
 
 public class CreatePostDto
 {
